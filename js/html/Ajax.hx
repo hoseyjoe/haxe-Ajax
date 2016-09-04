@@ -13,14 +13,14 @@ abstract HTTPMethod(String) from String to String {
 	var DELETE = "DELETE";
 }
 
-typedef Response = {
+typedef Responses = {
 	var status:Int;
 	var response:Dynamic;
 	var xhr:XMLHttpRequest;
 };
 
 class Ajax {
-	private static function res(xhr:XMLHttpRequest):Response {
+	private static function res(xhr:XMLHttpRequest):Responses {
 		return {
 			status: xhr.status,
 			response: xhr.response,
@@ -28,8 +28,8 @@ class Ajax {
 		};
 	}
 
-	public static function request(method:HTTPMethod, url:String, ?headers:StringMap<String>, ?data:String):Promise<Response> {
-		var def = new Deferred<Response>();
+	public static function request(method:HTTPMethod, url:String, ?headers:StringMap<String>, ?data:String):Promise<Responses> {
+		var def = new Deferred<Responses>();
 		var prom = def.promise();
 
 		var xhr:XMLHttpRequest = new XMLHttpRequest();
